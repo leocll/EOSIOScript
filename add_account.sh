@@ -33,6 +33,6 @@ console_success_log "private key: $private_key"
 console_success_log "public key: $public_key"
 
 path=$(cd `dirname $0`; pwd)
-path="$path/default钱包账户"
+path="$path/钱包账户/default钱包账户"
 echo "\n\naccount: $account \nprivate key: $private_key \npublic key: $public_key" >> $path
 console_success_log "账户信息已写入：$path"
