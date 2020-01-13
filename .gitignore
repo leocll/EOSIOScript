@@ -1,6 +1,6 @@
-钱包账户/
-**/钱包账户/
 **/.DS_Store
+node/
+ide/
 
 # Byte-compiled / optimized / DLL files
 __pycache__/
