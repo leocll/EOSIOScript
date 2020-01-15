@@ -15,14 +15,25 @@ LOG_yellow() {
 
 CMD_run() {
 	"$@"
-    LOG_red "command failed: $*" >&2
+	local code=$?
+    [[ $code != 0 ]] && LOG_red "Command: $*" >&2
+	return $code
 }
-CMD_run_ast() {
+CMD_run_assert() {
 	"$@"
-	CMD_assert "command failed: $*"
+	CMD_assert "Command: $*"
+}
+CMD_run_out_assert() {
+	local txt
+	txt=`$@ 2>&1`
+	if [ $? != 0 ]; then
+		LOG_red "${txt:-Error: Unknown error}" >&2
+		LOG_yellow "Command: $*" >&2
+		exit 1
+	fi
 }
 CMD_assert() {
-	[ $? != 0 ] && ERROR "${1:-'error: CMD_assert'}"
+	[ $? != 0 ] && ERROR "${1:-'Error: CMD_assert'}"
 }
 
 ERROR() {
@@ -31,9 +42,9 @@ ERROR() {
 }
 
 ASSERT_z() {
-	[ -z "$1" ] && ERROR "${2:-'error: ASSERT_z'}"
+	[ -z "$1" ] && ERROR "${2:-'Error: ASSERT_z'}"
 }
 
 ASSERT_f() {
-	[ -f "$1" ] || ERROR "${2:-'error: ASSERT_f'}"
+	[ -f "$1" ] || ERROR "${2:-'Error: ASSERT_f'}"
 }
