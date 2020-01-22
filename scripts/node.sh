@@ -21,9 +21,16 @@ run_node() {
 }
 
 init_node() {
+	# eosio.token
 	CMD_run_out_assert $CLEOS create account eosio eosio.token ${NODE_PRODUCER_PUB_KEY} -p eosio@active
 	CMD_run_out_assert $CLEOS set contract eosio.token "${CONTRACTS_DIR}/eosio.token/src" eosio.token.wasm eosio.token.abi -p eosio.token@active
 	CMD_run_out_assert $CLEOS push action eosio.token create "[\"eosio\", \"1000000000.0000 EOS\"]" -p eosio.token@active
+}
+
+stop_node() {
+	# CMD_run_out_assert ps -ef | grep $NODEOS | grep -v grep | awk '{print $2}' | xargs kill
+	local txt
+	txt=`ps -ef | grep $NODEOS | grep -v grep | awk '{print $2}'` && [[ -n "${txt}" ]] && CMD_run_assert kill "${txt}"
 }
 
 create_account() {
@@ -39,4 +46,5 @@ deploy_contract() {
 }
 
 # run_node
-init_node
+# init_node
+stop_node

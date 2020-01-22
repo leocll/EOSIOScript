@@ -7,7 +7,7 @@ export SCRIPTS_DIR=$(cd $(dirname ${BASH_SOURCE[0]});pwd)
 bash $SCRIPTS_DIR/wallet.sh
 bash $SCRIPTS_DIR/node.sh
 
-exit 0
+# exit 0
 
 # wallet
 run_wallet() {

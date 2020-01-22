@@ -16,8 +16,13 @@ init_wallet() {
 	CMD_run_out_assert $CLEOS wallet import -n ${WALLET_NAME} --private-key ${NODE_PRODUCER_PRI_KEY}
 }
 
+stop_wallet() {
+	local txt
+	txt=`ps -ef | grep $KEOSD | grep -v grep | awk '{print $2}'` && [[ -n "${txt}" ]] && CMD_run_assert kill "${txt}"
+}
+
 unlock_wallet() {
 	CMD_run_out_assert $CLEOS wallet create -n ${WALLET_NAME} -f ${WALLET_DIR}/${WALLET_NAME}.txt
 }
 
-run_wallet
+# run_wallet
