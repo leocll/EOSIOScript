@@ -30,7 +30,7 @@ plugin = eosio::chain_api_plugin
 EOF
 )
 
-EOSIO_BIN_DIR=/Users/edz/Documents/eosio/2.0.0/opt/eosio/bin
+EOSIO_BIN_DIR=${HOME}/eosio/2.0.0/opt/eosio/bin/
 export KEOSD=${EOSIO_BIN_DIR}/keosd #$(command -v keosd)
 export NODEOS=${EOSIO_BIN_DIR}/nodeos #$(command -v nodeos)
 CLEOS=${EOSIO_BIN_DIR}/cleos #$(command -v keosd)
